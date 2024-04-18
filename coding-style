@@ -1,0 +1,53 @@
+#!/usr/bin/python3
+
+import os
+import re
+
+
+def check_coding_style(path: str, report: str):
+    if path.endswith(".hs"):
+        return os.system(f"/usr/local/bin/lambdananas {path} >> {report}")
+    if path.endswith(".c") or path.endswith(".h") or path.endswith("Makefile"):
+        return os.system(f"/usr/local/bin/new-vera++ {path} >> {report}")
+
+
+def traverse(root: str, report: str):
+    for root, dirs, files in os.walk(root):
+        for file in filter(lambda f: not f.startswith("tests_"), files):
+            file_path = os.path.join(root, file)
+            if os.path.isfile(file_path):
+                check_coding_style(file_path, report=report)
+
+
+def format_report(report: str, code_to_comment: str) -> str:
+    lines = report.split("\n")
+    rules = dict([rule.split(":", 1) for rule in code_to_comment.split("\n")])
+    for i, line in enumerate(lines):
+        re_match = re.findall(
+            r"(FATAL|MAJOR|MINOR|INFO):([A-Z]-[A-Z]\d+)$", line, re.MULTILINE
+        )
+        if len(re_match) == 1:
+            lines[i] = line.replace(
+                f"{re_match[0][0]}:{re_match[0][1]}", rules[re_match[0][1]]
+            )
+    return "\n".join(lines) + "\n"
+
+
+def main() -> int:
+    report_path = "coding-style-report.log"
+    if os.path.exists(report_path):
+        os.remove(report_path)
+    traverse(root=".", report=report_path)
+    with open(report_path, "r") as fp:
+        report = fp.read().strip()
+    with open("/root/vera/code_to_comment", "r") as fp:
+        code_to_comment = fp.read().strip()
+    formatted_report = format_report(report=report, code_to_comment=code_to_comment)
+    with open(report_path, "w+") as fp:
+        fp.write(formatted_report)
+    print(formatted_report)
+    return 0
+
+
+if __name__ == "__main__":
+    main()
