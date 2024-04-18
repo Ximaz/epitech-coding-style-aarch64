@@ -38,6 +38,9 @@ def main() -> int:
     if os.path.exists(report_path):
         os.remove(report_path)
     traverse(root=".", report=report_path)
+    if not os.path.exists(report_path):
+        print("No file detected for coding-style")
+        return 0
     with open(report_path, "r") as fp:
         report = fp.read().strip()
     with open("/root/vera/code_to_comment", "r") as fp:

@@ -28,6 +28,7 @@ RUN dnf -y upgrade                     \
     langpacks-en                       \
     libconfig                          \
     libconfig-devel                    \
+    gmp-devel                          \
     llvm.aarch64                       \
     llvm-devel.aarch64                 \
     make.aarch64                       \
@@ -53,15 +54,16 @@ RUN python3 -m pip install --upgrade pip           \
     && localedef -i en_US -f UTF-8 en_US.UTF-8
 
 # Install Lambdananas for Haskell coding style check
-# RUN cd /tmp                                                                    \
-#     && curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+RUN cd /tmp                                                                    \
+    && curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh \
+    && /root/.ghcup/bin/ghcup install ghc 9.8.2
 
-# RUN cd /tmp                                           \
-#     && git clone https://github.com/Ximaz/lambdananas \
-#     && export PATH="/root/.ghcup/bin/:$PATH"          \
-#     && cd lambdananas                                 \
-#     && make                                           \
-#     && mv lambdananas /usr/local/bin
+RUN cd /tmp                                             \
+    && git clone https://github.com/Epitech/lambdananas \
+    && export PATH="/root/.ghcup/bin/:$PATH"            \
+    && cd lambdananas                                   \
+    && make                                             \
+    && mv lambdananas /usr/local/bin
 
 # Install Banana for coding style checker
 
