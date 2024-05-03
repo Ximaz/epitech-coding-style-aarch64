@@ -2,4 +2,4 @@
 
 load_tmp_env() { (set -a && source "$1" && shift && "${@}") }
 
-load_tmp_env "./.env" zsh build.zsh --no-cache
+load_tmp_env "./.env" zsh build.zsh

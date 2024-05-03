@@ -1,0 +1,11 @@
+boost-devel
+git
+cmake
+make
+gcc-c++
+python3-devel
+which
+tcl-devel
+glibc-locale-source
+glibc-langpack-en
+gmp-devel
