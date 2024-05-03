@@ -76,7 +76,7 @@ RUN cd /tmp                                                                     
     && make install
 
 # Copy the vera profiles from https://github.com/Epitech/banana-coding-style-checker
-COPY banana-coding-style-checker/vera /root/vera
+COPY vera /root/vera
 
 RUN cd /root                                                                                  \
     && echo -e "#!/bin/bash\nvera++ -p epitech -r /root/vera \$@" > /usr/local/bin/new-vera++ \

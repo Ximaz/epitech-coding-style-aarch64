@@ -52,7 +52,7 @@ function build_image {
     local TAG="${1}"
     local DOCKER_OPTS="${2}"
 
-    docker build $DOCKER_OPTS --pull --tag "epitechcontent/epitest-coding-style:${TAG}" .
+    docker build $DOCKER_OPTS --pull --tag "ximaz/epitech-coding-style-aarch64:${TAG}" .
 
     if [[ "${?}" -ne 0 ]]; then
         echo "Failed to build the docker image."
@@ -62,11 +62,6 @@ function build_image {
 
 function main {
     read_opts
-    if [[ ! -d "banana-coding-style-checker" ]]; then
-        git clone "${BANANA_VERA_REPOSITORY}"
-    else
-        cd banana-coding-style-checker && git pull && cd ..
-    fi
     build_image "${opts[1]}" "${opts[2]}"
 }
 
