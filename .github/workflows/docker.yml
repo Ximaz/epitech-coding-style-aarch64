@@ -20,8 +20,8 @@ jobs:
             -   name: "Get banana profile"
                 run: |
                     git clone https://${{ env.PERSONNAL_ACCESS_TOKEN }}@github.com/Epitech/banana-coding-style-checker
-                    mv bannana-coding-style-checker/vera .
-                    rm -rf bannana-coding-style-checker
+                    mv banana-coding-style-checker/vera .
+                    rm -rf banana-coding-style-checker
             -
                 name: "Set up AArch64"
                 uses: docker/setup-qemu-action@v3
