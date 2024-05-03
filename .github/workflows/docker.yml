@@ -17,11 +17,6 @@ jobs:
                 with:
                     fetch-depth: 0
 
-            -   name: "Get banana profile"
-                run: |
-                    git clone https://${{ env.PERSONNAL_ACCESS_TOKEN }}@github.com/Epitech/banana-coding-style-checker
-                    mv banana-coding-style-checker/vera .
-                    rm -rf banana-coding-style-checker
             -
                 name: "Set up AArch64"
                 uses: docker/setup-qemu-action@v3
@@ -35,6 +30,12 @@ jobs:
                 with:
                     username: "${{ env.DOCKERHUB_USERNAME }}"
                     password: "${{ env.DOCKERHUB_TOKEN }}"
+
+            -   name: "Get banana profile"
+                run: |
+                    git clone https://${{ env.PERSONNAL_ACCESS_TOKEN }}@github.com/Epitech/banana-coding-style-checker
+                    mv banana-coding-style-checker/vera .
+                    rm -rf banana-coding-style-checker
 
             -   name: Build and push
                 uses: docker/build-push-action@v5
