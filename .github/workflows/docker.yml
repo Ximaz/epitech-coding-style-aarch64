@@ -15,15 +15,15 @@ jobs:
             -   name: "Checkout"
                 uses: actions/checkout@v4.1.4
 
-            -   name: "Set up QEMU"
-                uses: docker/setup-qemu-action@v3
-
             -   name: "Get banana profile"
                 run: |
                     git clone https://${{ env.PERSONNAL_ACCESS_TOKEN }}@github.com/Epitech/banana-coding-style-checker
                     mv banana-coding-style-checker/vera .
                     rm -rf banana-coding-style-checker
                     ls
+
+            -   name: "Set up QEMU"
+                uses: docker/setup-qemu-action@v3
 
             -   name: "Set up Docker Buildx"
                 uses: docker/setup-buildx-action@v3
