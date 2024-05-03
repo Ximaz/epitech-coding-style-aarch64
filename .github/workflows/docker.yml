@@ -19,7 +19,7 @@ jobs:
 
             -   name: "Get banana profile"
                 run: |
-                    git clone https://${{ env.PERSONNAL_ACCESS_TOKEN }}@github.com/Epitech/bannana-coding-style-checker
+                    git clone https://${{ env.PERSONNAL_ACCESS_TOKEN }}@github.com/Epitech/banana-coding-style-checker
                     mv bannana-coding-style-checker/vera .
                     rm -rf bannana-coding-style-checker
             -
