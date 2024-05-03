@@ -14,17 +14,15 @@ jobs:
         steps:
             -   name: "Checkout"
                 uses: actions/checkout@v4.1.4
-                with:
-                    fetch-depth: 0
 
-            -
-                name: "Set up AArch64"
+            -   name: "Set up QEMU"
                 uses: docker/setup-qemu-action@v3
 
             -   name: "Set up Docker Buildx"
                 uses: docker/setup-buildx-action@v3
                 with:
                     platforms: linux/arm64
+
             -   name: Login to Docker Hub
                 uses: docker/login-action@v3
                 with:
@@ -41,6 +39,9 @@ jobs:
                 uses: docker/build-push-action@v5
                 with:
                     push: true
+                    platforms: linux/arm64
                     tags: ximaz/epitech-coding-style-aarch64:latest
                     cache-from: |
-                        type=local,src=.
+                        type=local,src=vera
+                    cache-to: |
+                        type=local,dest=./vera
