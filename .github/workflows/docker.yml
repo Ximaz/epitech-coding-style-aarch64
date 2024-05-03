@@ -32,7 +32,7 @@ jobs:
             -   name: "Get banana profile"
                 run: |
                     git clone https://${{ env.PERSONNAL_ACCESS_TOKEN }}@github.com/Epitech/banana-coding-style-checker
-                    mv banana-coding-style-checker/vera .
+                    mv banana-coding-style-checker/vera /vera
                     rm -rf banana-coding-style-checker
 
             -   name: Build and push
@@ -41,7 +41,3 @@ jobs:
                     push: true
                     platforms: linux/arm64
                     tags: ximaz/epitech-coding-style-aarch64:latest
-                    cache-from: |
-                        type=local,src=vera
-                    cache-to: |
-                        type=local,dest=/vera
