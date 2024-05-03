@@ -55,12 +55,11 @@ RUN python3 -m pip install --upgrade pip           \
 
 # Install Lambdananas for Haskell coding style check
 RUN cd /tmp                                                                    \
-    && curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh \
-    && /root/.ghcup/bin/ghcup install ghc 9.8.2
+    && curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | GHCUP_CURL_OPTS="-k" BOOTSTRAP_HASKELL_GHC_VERSION="9.6.5" sh
 
 RUN cd /tmp                                             \
     && git clone https://github.com/Epitech/lambdananas \
-    && export PATH="/root/.ghcup/bin/:$PATH"            \
+    && export PATH="/root/.ghcup/bin/:/root/.cabal/bin/:$PATH"            \
     && cd lambdananas                                   \
     && make                                             \
     && mv lambdananas /usr/local/bin
